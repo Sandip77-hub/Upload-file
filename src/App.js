@@ -3,9 +3,11 @@ import axios from 'axios';
 
 const FileUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadedVideo, setUploadedVideo] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    setUploadedVideo(URL.createObjectURL(event.target.files[0]));
   };
 
   const handleUpload = async () => {
@@ -22,6 +24,7 @@ const FileUploader = () => {
 
         console.log('File uploaded successfully:', response.data);
       } catch (error) {
+
         console.error('Error uploading file:', error);
       }
     } else {
@@ -32,10 +35,17 @@ const FileUploader = () => {
   return (
     <div className="file-uploader">
       <input type="file" onChange={handleFileChange} />
+      {uploadedVideo && (
+        <div className="uploaded-video">
+          <video controls>
+            <source src={uploadedVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      )}
       <button onClick={handleUpload}>Upload</button>
     </div>
   );
 };
 
 export default FileUploader;
-
