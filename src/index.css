@@ -21,4 +21,12 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+.uploaded-video {
+  margin-top: 20px;
+}
+
+video {
+  width: 100%;
+  max-width: 500px;
+}
 
